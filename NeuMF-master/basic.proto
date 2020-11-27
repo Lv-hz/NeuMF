@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+service File {
+    rpc upload (stream FileBody) returns (Response);
+}
+
+service Train {
+    rpc train (GuidInfo) returns (stream TrainResult);
+}
+
+service PredictResult {
+    rpc predictResult (stream PredictBody) returns (stream PredictResultFile);
+}
+
+message Response {
+    string status = 1;
+    string result = 2;
+}
+
+message FileBody {
+    bytes file = 1;
+    string name = 2;
+}
+
+message PredictBody {
+    bytes file = 1;
+    string name = 2;
+    string guid = 3;
+}
+
+message GuidInfo {
+    string guid = 1;
+}
+
+message TrainResult {
+    bytes file = 1;
+}
+
+message PredictResultFile {
+    bytes file = 1;
+}
